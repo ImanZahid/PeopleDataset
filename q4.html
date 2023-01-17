@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./db.js"></script>
+    <style>
+      table{
+        border-collapse: collapse;
+        border: 1px solid #999;
+        padding: 5px;
+      }
+      td,th{
+        border: 1px solid #999;
+        padding: 5px;
+      }
+      #dp{
+        width: 40px;
+      }
+      #fav{
+        width: 25px;
+      }
+
+      #container{
+        display: flex;
+        justify-content: center;
+      }
+      .bg
+        {
+            background-color: rgb(197, 196, 196);
+        }
+      
+      footer{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        }
+        #favimg{
+          margin-top: 20px;
+        }
+    </style>
+    
+  </head>
+  <body>
+    <div id="container">
+      <table>
+        <tr">
+          <th>Profile</th>
+          <th>Fullname</th>
+          <th>Fovorites</th>
+        </tr>
+        <script>
+
+          var MaxSize=0
+          var ids=[]
+          var freq=[]
+          // Find Max Fav
+          for(var i=0;i<people.length;i++){
+            var favlength=people[i].favorites.length
+            ids.push(people[i].id)
+            if(MaxSize<favlength){
+              MaxSize=favlength
+              //The one having the maxFav=grey bg
+            }
+          }
+          //we stored the ids of people and compared them with fav, if they exist in fav then we increment
+          //1st loop is for frq[]
+          for(var i=0;i<people.length;i++)
+          {
+            freq[i]=0;
+
+              for(var j=0;j<people.length;j++){
+                //2nd loop is for people
+                  for(var k=0;k<people[j].favorites.length;k++){
+                    //3rd loop is for fav
+                    if(ids[i]===people[j].favorites[k])
+                      {
+                        freq[i]=freq[i]+1
+                      }
+                  }
+              }
+          }
+          var maxIndex=0;
+          var maxValue=0;
+          var mostFav=[];
+          //id of most fav
+
+          for(var i=0;i<people.length;i++){
+            if(freq[maxIndex]<freq[i]){
+              maxIndex=i;
+              maxValue=freq[maxIndex]
+            }
+          }
+
+          for(var p=0;p<people.length;p++){
+            if(maxValue===freq[p]){
+              mostFav.push(p)
+            }
+          }       
+          //console.log(freq)
+          var String=""
+          
+          for (let p of people) {
+            var fav=p.favorites.length;
+            if(MaxSize==fav){
+              String="bg"
+            }else{
+              String=""
+            }
+            //console.log(fav)
+        
+          
+            document.write(`
+            <tr class=${String}>
+                <td><img src="./img/${p.id}.png" alt="" id="dp"></td>
+                <td >${p.name} ${p.lastname}</td>
+                <td>
+            `)
+            for(var i=0;i<p.favorites.length;i++){
+              document.write(`
+              <img src="./img/${p.favorites[i]}.png" alt="" id="fav">
+            `)
+            };
+            document.write(`
+                
+              </td>
+              </tr>
+              
+              `)
+          }
+        </script>
+      </table>
+    </div>
+   <footer>
+    <div>
+      <script>
+        document.write(`Most Favorite people (${mostFav.length})`)
+      </script>
+      <div id="favimg">
+        <script>
+          
+          for(var i=0;i<mostFav.length;i++){
+          
+            document.write(` <img  src="./img/${ids[mostFav[i]]}.png">`)
+          }
+        </script>
+      </div>
+    </div>
+   </footer>
+  </body>
+</html>

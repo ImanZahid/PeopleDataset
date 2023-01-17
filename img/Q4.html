@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/db.js"></script>
+    <script src="./Q4.js"></script>
+    <title>Document</title>
+    <style>
+        table 
+        {
+            margin:0 auto;
+            border-collapse: collapse;
+            border: 1px solid #999;
+            
+        }
+        td
+        {
+            border: 1px solid #999;
+            padding:5px;
+        }
+        .profile
+        {
+            width:40px;
+        }
+
+        .fav
+        {
+            width:25px;
+            padding-right:5px;
+        }
+
+        .GrayBG
+        {
+            background-color: rgb(197, 196, 196);
+        }
+        .Fav
+        {
+            text-align: center;
+            margin-top:20px;
+        }
+        .MOST
+        {
+            text-align: center;
+            margin-top:20px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+       <thead>
+        <tr>
+            <td>Profile</td>
+            <td>Fullname</td>
+            <td>Favorites</td>
+        </tr>
+       </thead>
+       <tbody>
+        <script>
+            var String="";
+           var number=people.length;
+           for(var i=0; i<number; i++)
+           {
+            var matchPicture= people[i].id;
+            var fav=people[i].favorites.length;
+             if(MaxSize==fav)
+             {
+                String="GrayBG";
+             }else
+             {
+                String="";
+             }
+        
+            document.write(`
+           
+                <tr class=${String}>
+                    <td><img class="profile" src="./img/${matchPicture}.png"></td>
+                    <td>${people[i].name} ${people[i].lastname}</td> 
+                     
+                    <td>
+                       
+              
+           
+           `);
+
+                    for(var j=0; j<fav; j++)
+                    {
+                        var imgFav=people[i].favorites[j];
+                        if(i<number)
+                        {
+                            document.write(
+                                `<img class="fav" src="./img/${imgFav}.png">`);
+
+                        
+
+                        }
+                        
+                    }
+
+           document.write(`
+                
+            </td>
+            </tr>
+            
+            `);
+           }
+
+
+             
+        </script>
+       </tbody>
+
+    </table>
+
+    <script>
+    document.write(`<div class="Fav">Most Favorite People(${MostFavorites.length})</div>`);
+
+      document.write(`<div class="MOST">`);
+        for(var i=0; i<MostFavorites.length; i++)
+        {
+            document.write(`
+            
+            <img  src="./img/${Occurances[MostFavorites[i]]}.png">`);
+
+            
+        
+        }
+        document.write(`</div>`);
+
+    </script>
+</body>
+</html>
